@@ -175,6 +175,10 @@ class Trainer:
             else:
                 self.scheduler.step()
 
+        # 参数裁剪
+        if hasattr(self, 'clip_parameters'):
+            self.clip_parameters()
+
     def _prepare_inputs(self, train_dataloader, steps_per_epoch, epochs, verbose, batch_size):
         '''对fit的输入进行类型检查并置为成员变量'''
         if not hasattr(train_dataloader, '__len__'):
