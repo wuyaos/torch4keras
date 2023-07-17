@@ -139,6 +139,7 @@ class Trainer:
         # loss backward
         loss = self.loss_backward(loss)
         loss_detail = {k: (v.item() if isinstance(v, torch.Tensor) else v) / self.grad_accumulation_steps for k, v in loss_detail.items()}
+        loss_detail['lr'] = self.optimizer.param_groups[0]['lr']
         return output, loss, loss_detail
 
     def loss_backward(self, loss):
